@@ -1,7 +1,6 @@
-# Bare Bones Code to View the Image Published from the Turtlebot3 on a Remote Computer
-# Intro to Robotics Research 7785
-# Georgia Institute of Technology
-# Sean Wilson, 2022
+#!/usr/bin/env python
+"""local_view_image.py: Node:local_view_image"""
+__author__ = 'Hanyao Guo, Yifei Du'
 
 import rclpy
 from rclpy.node import Node
@@ -119,7 +118,6 @@ class Find_Object(Node):
         top, bottom, img = object_locate(self._imgBGR)
         processed_image = CvBridge().cv2_to_compressed_imgmsg(img)
         self._image_view_publisher.publish(processed_image)
-        # ***************************************************danger***************************************************
         width, length, _ = img.shape
         coordinates_msg = Float64MultiArray()
         # MSG format:[top_left_x,top_left_y,bottom_right_x,bottom_right_y,length,width]
@@ -134,12 +132,6 @@ def main():
 
     while rclpy.ok():
         rclpy.spin_once(video_subscriber)  # Trigger callback processing.
-    # if(video_subscriber._display_image):
-    #	if video_subscriber.get_user_input() == ord('q'):
-    # cv2.destroyAllWindows()
-    #		break
-
-    # Clean up and shutdown.
     video_subscriber.destroy_node()
     rclpy.shutdown()
 
