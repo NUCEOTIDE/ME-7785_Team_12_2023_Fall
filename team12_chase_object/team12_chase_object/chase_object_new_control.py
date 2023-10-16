@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+"""local_view_image.py: Node:local_view_image"""
+__author__ = 'Hanyao Guo, Yifei Du'
+
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import Float64MultiArray, String
