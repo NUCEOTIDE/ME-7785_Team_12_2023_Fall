@@ -1,5 +1,7 @@
-#!/user/bin/env python
-# import ros / turtlebot3 related libraries
+#!/usr/bin/env python
+"""local_view_image.py: Node:local_view_image"""
+__author__ = 'Hanyao Guo, Yifei Du'
+
 import rclpy
 
 # import node:
