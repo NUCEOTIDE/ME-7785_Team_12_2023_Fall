@@ -26,13 +26,15 @@ class PlotStrategyVectorEndPoints(Node):
         self.v_cw = np.zeros(2, dtype='float64')
         self.v_ccw = np.zeros(2, dtype='float64')
         self.vectors = np.zeros((4,2))
+        self.current_state = -1
 
 
         self.global_coord = np.zeros(2, dtype='float64')
 
         self.vectors_subscription = self.create_subscription(Float64MultiArray, 'strategy_vectors', self._get_vectors, 10)
         self.vectors_subscription
-
+        self.current_state_subscription= self.create_subscription(Point, 'vector', self._get_state, 10)
+        self.current_state_subscription
 
         # publish to topic /object_range
         # self.publisher_ = self.create_publisher(LaserScan, '/object_range', 10)
@@ -49,6 +51,8 @@ class PlotStrategyVectorEndPoints(Node):
         self.v_ccw[1] = vector_coord[6]
         self.vectors = np.array([self.v_gtg.tolist(), self.v_ao.tolist(), self.v_cw.tolist(), self.v_ccw.tolist()])
         
+    def _get_state(self, current_state):
+        self.current_state = current_state.z
 
 
 def init_polar_graph():
