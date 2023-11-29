@@ -1,0 +1,19 @@
+install gazebo
+(src) git clone -b humble-devel https://github.com/ROBOTIS-GIT/turtlebot3_simulations.git
+(ws) colcon build --symlink-install
+
+gazebo 
+ros2 launch turtlebot3_gazebo turtlebot3_maze.launch.py use_sim_time:=true
+
+SLAM
+ros2 launch turtlebot3_cartographer cartographer.launch.py
+
+teleop
+ros2 run turtlebot3_teleop teleop_keyboard
+
+save map
+ros2 run nav2_map_server map_saver_cli -f ~/map
+
+navigation
+ros2 launch turtlebot3_navigation2 navigation2.launch.py map:=$HOME/map.yaml
+
